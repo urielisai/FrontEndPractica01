@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Login = () => {
 
     try {
       const response = await axios.post("http://localhost:5001/api/login", {
-        username,
+        email,
         password,
       });
 
@@ -25,7 +25,7 @@ const Login = () => {
         setError(response.data.message);
       }
     } catch (error) {
-      setError("Error al iniciar sesión,Vuele a intentar");
+      setError("Error al iniciar sesión. Vuelve a intentarlo.");
     }
   };
 
@@ -36,10 +36,10 @@ const Login = () => {
         <form onSubmit={handleLogin}>
           <div className="mb-4">
             <input
-              type="text"
-              placeholder="Usuario"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              type="email"
+              placeholder="Correo Electrónico"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full p-2 border rounded"
               required
             />
@@ -47,7 +47,7 @@ const Login = () => {
           <div className="mb-4">
             <input
               type="password"
-              placeholder="Contrasena"
+              placeholder="Contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full p-2 border rounded"
